@@ -22,6 +22,10 @@ defmodule EmailReports.Router do
     get "/", PageController, :index
   end
 
+  if Mix.env == :dev do
+    forward "/mailbox", Plug.Swoosh.MailboxPreview, [base_path: "/mailbox"]
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", EmailReports do
   #   pipe_through :api
