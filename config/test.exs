@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :email_reports, EmailReports.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  # username: "postgres",
+  # password: "postgres",
   database: "email_reports_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
