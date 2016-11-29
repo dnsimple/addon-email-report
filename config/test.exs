@@ -23,6 +23,9 @@ config :email_reports,
   dnsimple_client_id: "some-id",
   dnsimple_client_secret: "some-access-token"
 
+config :email_reports, EmailReports.Mailer,
+  adapter: Swoosh.Adapters.Test
+
 # Configure mocks
 config :email_reports,
   dnsimple_oauth_service: EmailReports.Dnsimple.OauthMock,

@@ -46,11 +46,6 @@ config :email_reports, EmailReports.Repo,
 config :email_reports, EmailReports.Mailer,
   adapter: Swoosh.Adapters.Local
 
-# Configure E-Mail reports
-config :email_reports,
-  report_from: {"Trusty form DNSimple", "trusty@dnsimple.com"},
-  report_reply_to: {"DNSimple Support", "support@dnsimple.com"}
-
 # Configure 3rd parties
 config :email_reports,
   dnsimple_client_id: "bbf472f1dcc6d611",
