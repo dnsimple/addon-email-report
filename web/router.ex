@@ -16,6 +16,9 @@ defmodule EmailReports.Router do
   scope "/", EmailReports do
     pipe_through :browser # Use the default browser stack
 
+    get "/dnsimple/authorize", DnsimpleOauthController, :new
+    get "/dnsimple/callback", DnsimpleOauthController, :create
+
     get "/", PageController, :index
   end
 

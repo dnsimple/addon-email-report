@@ -17,3 +17,15 @@ config :email_reports, EmailReports.Repo,
   database: "email_reports_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Configure 3rd parties
+config :email_reports,
+  dnsimple_client_id: "some-id",
+  dnsimple_client_secret: "some-access-token"
+
+# Configure mocks
+config :email_reports,
+  dnsimple_oauth_service: EmailReports.Dnsimple.OauthMock,
+  dnsimple_identity_service: EmailReports.Dnsimple.IdentityMock,
+  dnsimple_domains_service: EmailReports.Dnsimple.DomainsMock,
+  digitalocean_oauth_service: EmailReports.DigitalOcean.OauthMock

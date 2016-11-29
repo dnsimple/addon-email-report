@@ -41,3 +41,8 @@ config :email_reports, EmailReports.Repo,
   database: "email_reports_dev",
   hostname: "localhost",
   pool_size: 10
+
+# Configure 3rd parties
+config :email_reports,
+  dnsimple_client_id: "bbf472f1dcc6d611",
+  dnsimple_client_secret: "JHIKTQjbzCtoBlf0TKpvE1B7jj0DzdrZ"
