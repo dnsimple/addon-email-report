@@ -64,3 +64,8 @@ config :logger, level: :info
 #
 #     config :email_reports, EmailReports.Endpoint, server: true
 #
+
+# Configure swoosh
+config :email_reports, EmailReports.Mailer,
+  adapter: Swoosh.Adapters.Postmark,
+  api_key: System.get_env("POSTMARK_API_KEY")
