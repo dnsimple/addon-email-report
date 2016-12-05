@@ -5,32 +5,27 @@ defmodule EmailReports.ReportEmailTest do
 
   setup do
     user = %{email: "user@example.com"}
-    {:ok, user: user}
+    {:ok, user: user, mail: ReportEmail.simple(user)}
   end
 
   describe "EmailReports.ReportEmail/1" do
-    test "sent to user mail without name", %{user: user} do
-      mail = ReportEmail.simple user
+    test "sent to user mail without name", %{user: user, mail: mail} do
       assert mail.to == [{"", user.email}]
     end
 
-    test "sent from the correct user", %{user: user} do
-      mail = ReportEmail.simple user
+    test "sent from the correct user", %{mail: mail} do
       assert mail.from == {"Trusty form DNSimple", "trusty@dnsimple.com"}
     end
 
-    test "sets correct reply to adress", %{user: user} do
-      mail = ReportEmail.simple user
+    test "sets correct reply to adress", %{mail: mail} do
       assert mail.reply_to == {"DNSimple Support", "support@dnsimple.com"}
     end
 
-    test "sets correct topic", %{user: user} do
-      mail = ReportEmail.simple user
+    test "sets correct topic", %{mail: mail} do
       assert mail.subject == "Your monthly DNSimple report!"
     end
 
-    test "mail has correct greeting", %{user: user} do
-      mail = ReportEmail.simple user
+    test "mail has correct greeting", %{user: user, mail: mail} do
       assert mail.html_body =~ "Welcome to Sample, #{user.email}!"
     end
   end
