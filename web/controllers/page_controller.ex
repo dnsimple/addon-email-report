@@ -12,7 +12,8 @@ defmodule EmailReports.PageController do
   end
 
   def send(conn, %{"report_params" => %{"email" => email}}) do
-    EmailReports.ReportEmail.simple(%{email: email})
+    account = conn.assigns[:current_account]
+    EmailReports.ReportEmail.simple(%{email: email, token: account.dnsimple_access_token})
     |> EmailReports.Mailer.deliver
     conn
     |> put_flash(:info, "Mail sent to #{email}.")

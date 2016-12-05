@@ -19,7 +19,8 @@ defmodule EmailReports.Mixfile do
   def application do
     [mod: {EmailReports, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :dnsimple, :swoosh, :phoenix_swoosh]]
+                    :phoenix_ecto, :postgrex, :dnsimple, :swoosh, :phoenix_swoosh,
+                    :timex]]
   end
 
   # Specifies which paths to compile per environment.
@@ -41,7 +42,8 @@ defmodule EmailReports.Mixfile do
       {:dnsimple, git: "https://github.com/dnsimple/dnsimple-elixir.git"},
       {:swoosh, "~> 0.5.0"},
       {:phoenix_swoosh, "~> 0.1.3"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:timex, "~> 3.0"}
    ]
   end
 

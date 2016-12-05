@@ -1,0 +1,31 @@
+<h1>You have <%= length(@domains)%> domains</h1>
+<ol>
+<%= Enum.map @domains, fn {domain, certs, forwards} -> %>
+    <li>
+    <h2><%= domain.name %></h2><small><%= domain.state %></small>
+    <p>
+      Expires: <%= expires(domain.expires_on) %> (auto renew is <%= auto_renew(domain.auto_renew) %>).
+    </p>
+    <p>
+      You have <%= length(certs) %> active certificates and <%= length(forwards) %> E-Mail forwards.
+      <%= if length(certs) > 0 do %>
+      <h4>Certificates</h4>
+      <dl>
+      <%= Enum.map certs, fn cert -> %>
+        <dt><%= cert.common_name %> <small><%= cert.authority_identifier %> (<%= cert.state %>)</small></dt>
+        <dd>Expires: <%= expires(cert.expires_on) %></dd>
+      <% end %>
+      </dl>
+      <% end %>
+      <%= if length(forwards) > 0 do %>
+      <h4>E-Mail forwards</h4>
+      <ul>
+      <%= Enum.map forwards, fn forward -> %>
+      <li><%= forward.from %> -> <%= forward.to %></li>
+      <% end %>
+      </ul>
+      <% end %>
+    </p>
+    </li>
+<% end %>
+</ol>

@@ -4,7 +4,7 @@ defmodule EmailReports.ReportEmailTest do
   alias EmailReports.ReportEmail
 
   setup do
-    user = %{email: "user@example.com"}
+    user = %{email: "user@example.com", token: "1234abcdf"}
     {:ok, user: user, mail: ReportEmail.simple(user)}
   end
 
@@ -27,6 +27,10 @@ defmodule EmailReports.ReportEmailTest do
 
     test "mail has correct greeting", %{user: user, mail: mail} do
       assert mail.html_body =~ "Welcome to Sample, #{user.email}!"
+    end
+
+    test "mail has the domain list", %{mail: mail} do
+      assert mail.html_body =~ "example.com"
     end
   end
 end

@@ -86,6 +86,17 @@ defmodule EmailReports.Dnsimple do
     end
   end
 
+  # E-Mail forwards
+
+  def email_forwards(account, domain_name) do
+    case domains_service.list_email_forwards(client(account), account.dnsimple_account_id, domain_name) do
+      {:ok, response} -> response.data
+      {:error, error} ->
+        IO.inspect(error)
+        raise "Failed to get e-mail forwards: #{inspect error}"
+    end
+  end
+
   # Domain Services
 
   def applied_services(account, domain_name) do

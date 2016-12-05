@@ -31,4 +31,5 @@ config :email_reports,
   dnsimple_oauth_service: EmailReports.Dnsimple.OauthMock,
   dnsimple_identity_service: EmailReports.Dnsimple.IdentityMock,
   dnsimple_domains_service: EmailReports.Dnsimple.DomainsMock,
+  dnsimple_domain_certificates_service: EmailReports.Dnsimple.CertificatesMock,
   digitalocean_oauth_service: EmailReports.DigitalOcean.OauthMock

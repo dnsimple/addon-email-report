@@ -21,7 +21,7 @@ defmodule EmailReports.PageControllerTest do
 
     conn = post conn, "/", %{"report_params" => %{"email" => email}}
 
-    assert_email_sent EmailReports.ReportEmail.simple(%{email: email})
+    assert_email_sent EmailReports.ReportEmail.simple(%{email: email, token: "anytoken"})
     assert redirected_to(conn) == page_path(conn, :index)
   end
 end
