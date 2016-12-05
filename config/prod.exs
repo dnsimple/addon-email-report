@@ -69,3 +69,8 @@ config :logger, level: :info
 config :email_reports, EmailReports.Mailer,
   adapter: Swoosh.Adapters.Postmark,
   api_key: System.get_env("POSTMARK_API_KEY")
+
+# Configure 3rd parties
+config :email_reports,
+  dnsimple_client_id: System.get_env("DNSIMPLE_CLIENT_ID"),
+  dnsimple_client_secret: System.get_env("DNSIMPLE_CLIENT_SECRET")
