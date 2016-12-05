@@ -20,6 +20,7 @@ defmodule EmailReports.Router do
     get "/dnsimple/callback", DnsimpleOauthController, :create
 
     get "/", PageController, :index
+    post "/", PageController, :send
   end
 
   if Mix.env == :dev do

@@ -1,0 +1,3 @@
+<div>
+  <h1>Welcome to Sample, <%= @user.email %>!</h1>
+</div>

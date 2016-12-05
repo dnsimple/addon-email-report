@@ -5,9 +5,17 @@ defmodule EmailReports.PageController do
 
   def index(conn, _params) do
     account = conn.assigns[:current_account]
-    IO.inspect EmailReports.Dnsimple.domains(account)
-    EmailReports.ReportEmail.simple(%{name: "Ole Michaelis", email: "Ole.Michaelis@gmail.com", username: "nesQuick"})
+    |> EmailReports.Dnsimple.whoami
+    |> Map.get(:account)
+
+    render conn, "index.html", email: account.email
+  end
+
+  def send(conn, %{"report_params" => %{"email" => email}}) do
+    EmailReports.ReportEmail.simple(%{email: email})
     |> EmailReports.Mailer.deliver
-    render conn, "index.html"
+    conn
+    |> put_flash(:info, "Mail sent to #{email}.")
+    |> redirect(to: page_path(conn, :index))
   end
 end

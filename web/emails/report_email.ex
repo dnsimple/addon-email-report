@@ -3,11 +3,11 @@ defmodule EmailReports.ReportEmail do
 
   def simple(user) do
     new
-    |> to({user.name, user.email})
+    |> to(user.email)
     |> from(config(:report_from))
     |> reply_to(config(:report_reply_to))
-    |> subject("Hello, Avengers!")
-    |> render_body("welcome.html", %{username: user.username})
+    |> subject("Your monthly DNSimple report!")
+    |> render_body("simple.html", %{user: user})
   end
 
   defp config(key) do

@@ -11,8 +11,13 @@ defmodule EmailReports.Dnsimple do
 
   # Identity
 
-  def whoami(client) do
-    identity_service.whoami(client)
+  def whoami(account) do
+    case identity_service.whoami(client(account)) do
+      {:ok, response} -> response.data
+      {:error, error} ->
+        IO.inspect(error)
+        raise "Failed to user account: #{inspect error}"
+    end
   end
 
   # Domains
