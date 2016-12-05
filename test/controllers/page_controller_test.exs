@@ -13,7 +13,7 @@ defmodule EmailReports.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"
-    assert html_response(conn, 200) =~ "Subscribe to your Monthly DNSimple report with user@example.com!"
+    assert html_response(conn, 200) =~ "Your personal regular DNSimple report!"
   end
 
   test "POST /", %{conn: conn} do
