@@ -5,3 +5,9 @@ elixir:
 
 services:
   - postgresql
+
+deploy:
+  provider: heroku
+  app: whispering-ocean-65786
+  api_key:
+    secure: "MNhUKZo2bOoE9Pr/MQWPgufQ9mDg0h/E5xjDr52hviAIX2t2beQcKakOcmX9Ib2I4CR36bkll2dnr6LdBDUF8+/yBtKI8wE2DdhRzWjuViScEBD9WHI3voyWnySTsLkMiev8GUyHMmif3MO3QZri80JdXFDx1LYeaXZBDy+kVdnjs7DgwH3TUJd8SnmOUVnP8xJ2khHe1DrCdnmv4VAMWWClXePcHVKAG/HK1thwipWygyYobTtfyNMl/MLtmrC7yEcZYI34satDf3QZSPu+dBoBBETLXLLtUcdLv3bjapE1+EBIihPnAEymV7zDCJ9BTZMhc32EAUIX840MrDq4wBiKIlqnIMx69CCqw281Pv5EXXdvtN6abi2ivTBOm4W2wdA/1Lg3qRMBAa4UjXUI2tshee/MV4vU//+iJ8MmT/JwC8YYXm+RKl8184Mb3r2wTcXf8CHB9jxXadPQCLHDU0Th2VWOMLoges4sqfTpFWyWwiVZN3/LeX0J40jjUYclglj1NFWxQq7MHz1AL94brY8ScDHKLcwqpYJoJLZ6IsFXnUka0XKld0bYiXxEOVnnUolSE7LvL+7ht9mpuHP6WibuYb5I6+w/FKX4h+Liu/G+jlL1tSQfzGDNLWhN8Qp9IRv1F884OeK4Su6xuEG9ALfOgu4G4+uEv9qnGtiPh6s="
