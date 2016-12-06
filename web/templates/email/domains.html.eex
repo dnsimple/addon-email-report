@@ -3,9 +3,11 @@
 <%= Enum.map @domains, fn {domain, certs, forwards} -> %>
     <li>
     <h2><%= domain.name %></h2><small><%= domain.state %></small>
+    <%= if domain.state == "registered" do %>
     <p>
       Expires: <%= expires(domain.expires_on) %> (auto renew is <%= auto_renew(domain.auto_renew) %>).
     </p>
+    <% end %>
     <p>
       You have <%= length(certs) %> active certificates and <%= length(forwards) %> E-Mail forwards.
       <%= if length(certs) > 0 do %>
