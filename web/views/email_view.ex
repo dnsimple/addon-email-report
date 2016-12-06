@@ -8,4 +8,6 @@ defmodule EmailReports.EmailView do
 
   def auto_renew(true), do: "on"
   def auto_renew(false), do: "off"
+
+  def manage_url(%Dnsimple.Domain{name: name}), do: "https://dnsimple.com/domains/#{name}"
 end
