@@ -13,8 +13,7 @@ defmodule Mix.Tasks.Reports.Send do
 
   def run(_) do
     {:ok, _pid, _} = ensure_started(EmailReports.Repo, [])
-    Application.ensure_all_started(:dnsimple)
-    Application.ensure_all_started(:swoosh)
+    for app <- [:dnsimple, :swoosh, :phoenix], do: Application.ensure_all_started(app)
 
     Repo.all(
       from s in EmailReports.Subscription,
