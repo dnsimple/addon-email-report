@@ -34,6 +34,9 @@ defmodule Mix.Tasks.Reports.Send do
 
     EmailReports.ReportEmail.simple(%{email: dnsimple_account.email, token: subscription.access_token})
     |> EmailReports.Mailer.deliver
+
+    EmailReports.Subscription.changeset(subscription, %{last_sent: DateTime.utc})
+    |> Repo.update
   end
 
   defp account(%EmailReports.Subscription{account_id: account_id, access_token: access_token}) do
