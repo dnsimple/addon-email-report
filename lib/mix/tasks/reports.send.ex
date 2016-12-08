@@ -12,7 +12,7 @@ defmodule Mix.Tasks.Reports.Send do
   @shortdoc "Sends out all pending reports"
 
   def run(_) do
-    {:ok, pid, _} = ensure_started(EmailReports.Repo, [])
+    {:ok, _pid, _} = ensure_started(EmailReports.Repo, [])
     Application.ensure_all_started(:dnsimple)
     Application.ensure_all_started(:swoosh)
 
