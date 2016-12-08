@@ -19,7 +19,7 @@ defmodule EmailReports.SubscriptionController do
     case Repo.insert(changeset) do
       {:ok, _subscription} ->
         conn
-        |> put_flash(:info, "Subscription created successfully.")
+        |> put_flash(:info, "Subscription created successfully. You will receive your first report shortly.")
         |> redirect(to: page_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
