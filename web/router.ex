@@ -21,6 +21,8 @@ defmodule EmailReports.Router do
 
     get "/", PageController, :index
     post "/", PageController, :send
+
+    resources "/subscriptions", SubscriptionController
   end
 
   if Mix.env == :dev do

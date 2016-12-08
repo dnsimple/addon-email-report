@@ -1,0 +1,30 @@
+<h2>Listing subscriptions</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Account</th>
+      <th>Access token</th>
+      <th>Last sent</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for subscription <- @subscriptions do %>
+    <tr>
+      <td><%= subscription.account_id %></td>
+      <td><%= subscription.access_token %></td>
+      <td><%= subscription.last_sent %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: subscription_path(@conn, :show, subscription), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: subscription_path(@conn, :edit, subscription), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: subscription_path(@conn, :delete, subscription), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New subscription", to: subscription_path(@conn, :new) %>
