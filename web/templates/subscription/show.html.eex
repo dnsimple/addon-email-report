@@ -1,0 +1,23 @@
+<h2>Show subscription</h2>
+
+<ul>
+
+  <li>
+    <strong>Account:</strong>
+    <%= @subscription.account_id %>
+  </li>
+
+  <li>
+    <strong>Access token:</strong>
+    <%= @subscription.access_token %>
+  </li>
+
+  <li>
+    <strong>Last sent:</strong>
+    <%= @subscription.last_sent %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: subscription_path(@conn, :edit, @subscription) %>
+<%= link "Back", to: subscription_path(@conn, :index) %>
