@@ -60,6 +60,6 @@ defmodule EmailReports.SubscriptionController do
 
     conn
     |> put_flash(:info, "Subscription deleted successfully.")
-    |> redirect(to: subscription_path(conn, :index))
+    |> redirect(to: page_path(conn, :index))
   end
 end

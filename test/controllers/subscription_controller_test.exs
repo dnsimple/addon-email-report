@@ -60,7 +60,7 @@ defmodule EmailReports.SubscriptionControllerTest do
   test "deletes chosen resource", %{conn: conn} do
     subscription = Repo.insert! %Subscription{}
     conn = delete conn, subscription_path(conn, :delete, subscription)
-    assert redirected_to(conn) == subscription_path(conn, :index)
+    assert redirected_to(conn) == page_path(conn, :index)
     refute Repo.get(Subscription, subscription.id)
   end
 end

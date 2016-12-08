@@ -16,7 +16,10 @@ defmodule EmailReports.PageController do
         access_token: account.dnsimple_access_token
     })
 
-    render conn, "index.html", email: dnsimple_account.email, changeset: changeset
+    render conn, "index.html",
+        email: dnsimple_account.email,
+        changeset: changeset,
+        subscription: Repo.get_by(Subscription, account_id: account.dnsimple_account_id)
   end
 
   def send(conn, %{"report_params" => %{"email" => email}}) do
