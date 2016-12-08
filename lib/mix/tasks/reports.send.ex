@@ -16,10 +16,9 @@ defmodule Mix.Tasks.Reports.Send do
     Application.ensure_all_started(:dnsimple)
     Application.ensure_all_started(:swoosh)
 
-    one_month_ago = %{DateTime.utc | month: DateTime.utc.month - 1}
     Repo.all(
       from s in EmailReports.Subscription,
-       where: s.last_sent < ^one_month_ago,
+       where: s.last_sent < ago(1, "month"),
        or_where: is_nil(s.last_sent),
        select: s
     )
