@@ -20,7 +20,7 @@ defmodule EmailReports.SubscriptionController do
       {:ok, _subscription} ->
         conn
         |> put_flash(:info, "Subscription created successfully.")
-        |> redirect(to: subscription_path(conn, :index))
+        |> redirect(to: page_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end

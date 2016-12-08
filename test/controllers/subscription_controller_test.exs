@@ -17,7 +17,7 @@ defmodule EmailReports.SubscriptionControllerTest do
 
   test "creates resource and redirects when data is valid", %{conn: conn} do
     conn = post conn, subscription_path(conn, :create), subscription: @valid_attrs
-    assert redirected_to(conn) == subscription_path(conn, :index)
+    assert redirected_to(conn) == page_path(conn, :index)
     assert Repo.get_by(Subscription, @valid_attrs)
   end
 
