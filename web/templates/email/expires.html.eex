@@ -1,0 +1,24 @@
+<%= if length(@domains ++ @certificates) == 0 do %>
+<h1>You have no expiring items within the next 30 days! 🎉</h1>
+<% else %>
+<h1>You have <%= length(@domains ++ @certificates) %> items within the next 30 days!</h1>
+
+<%= if length(@domains) > 0 do %>
+<h2><%= length(@domains) %> domains:</h2>
+<ul>
+<%= Enum.map @domains, fn domain -> %>
+  <li><%= domain.name %> expires <%= domain.expires_on %></li>
+<% end %>
+</ul>
+<% end %>
+
+<%= if length(@certificates) > 0 do %>
+<h2><%= length(@certificates) %> certificates:</h2>
+<ul>
+<%= Enum.map @certificates, fn certificate -> %>
+  <li><%= certificate.common_name %> expires <%= certificate.expires_on %></li>
+<% end %>
+</ul>
+<% end %>
+
+<% end %>

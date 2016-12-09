@@ -1,5 +1,7 @@
 <div>
-  <h1>Welcome to Sample, <%= @user.email %>!</h1>
+  <h1>We ❤️ DNS</h1>
+  <h2>Thanks for being a customer <%= @user.email %>!</h2>
 </div>
 
 <%= render "domains.html", domains: @domains %>
+<%= render "expires.html", domains: @expiring_domains, certificates: @expiring_domains %>

@@ -9,12 +9,18 @@ defmodule EmailReports.ReportEmail do
     domains = Dnsimple.domains(account)
     |> Enum.map(&(Task.async(__MODULE__, :enrich_domain, [&1, account])))
     |> Enum.map(&Task.await/1)
+
     new
     |> to(user.email)
     |> from(config(:report_from))
     |> reply_to(config(:report_reply_to))
     |> subject("Your monthly DNSimple report!")
-    |> render_body("simple.html", %{user: user, domains: domains})
+    |> render_body("simple.html", %{
+        user: user,
+        domains: domains,
+        expiring_domains: filter_expiring_domains(Enum.map(domains, &(elem(&1, 0)))),
+        expiring_domains: filter_expiring_certificates(Enum.map(domains, &(elem(&1, 1))))
+      })
   end
 
   def build_accout(token) do
@@ -33,6 +39,23 @@ defmodule EmailReports.ReportEmail do
       Task.await(certs_task) |> Enum.filter(&(active_certificate?(&1))),
       Task.await(fwd_task)
     }
+  end
+
+  def filter_expiring_domains(domains) do
+    Enum.filter(domains, &(expires_within_next_month?(&1.expires_on)))
+  end
+
+  def filter_expiring_certificates(certs) do
+    Enum.filter(certs, fn cert -> length(cert) > 0 end)
+    |> Enum.flat_map(&(&1))
+    |> Enum.filter(&(expires_within_next_month?(&1.expires_on)))
+  end
+
+  defp expires_within_next_month?(date) when is_binary(date) do
+    next_month = Timex.add(DateTime.utc_now, Duration.from_days(30))
+    Date.from_iso8601!(date)
+    |> Timex.compare(next_month)
+    |> Kernel.<(0)
   end
 
   defp active_certificate?(certs) do
