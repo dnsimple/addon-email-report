@@ -26,10 +26,6 @@ defmodule EmailReports.ReportEmailTest do
       assert mail.subject == "Your monthly DNSimple report!"
     end
 
-    test "mail has correct greeting", %{user: user, mail: mail} do
-      assert mail.html_body =~ "Welcome to Sample, #{user.email}!"
-    end
-
     test "mail has the domain list", %{mail: mail} do
       assert mail.html_body =~ "example.com"
     end
