@@ -19,7 +19,8 @@ defmodule EmailReports.ReportEmail do
         user: user,
         domains: domains,
         expiring_domains: filter_expiring_domains(Enum.map(domains, &(elem(&1, 0)))),
-        expiring_domains: filter_expiring_certificates(Enum.map(domains, &(elem(&1, 1))))
+        expiring_domains: filter_expiring_certificates(Enum.map(domains, &(elem(&1, 1)))),
+        did_you_know: Enum.random Application.get_env(:email_reports, :did_you_know)
       })
   end
 

@@ -5,3 +5,7 @@
 
 <%= render "domains.html", domains: @domains %>
 <%= render "expires.html", domains: @expiring_domains, certificates: @expiring_domains %>
+
+<p>
+  <small>Did you know <%= @did_you_know %></small>
+</p>

@@ -27,6 +27,7 @@ config :email_reports,
   report_from: {"Trusty form DNSimple", "trusty@dnsimple.com"},
   report_reply_to: {"DNSimple Support", "support@dnsimple.com"}
 
+import_config "did_you_know.exs"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
