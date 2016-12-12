@@ -33,3 +33,5 @@ config :email_reports,
   dnsimple_domains_service: EmailReports.Dnsimple.DomainsMock,
   dnsimple_domain_certificates_service: EmailReports.Dnsimple.CertificatesMock,
   digitalocean_oauth_service: EmailReports.DigitalOcean.OauthMock
+
+config :email_reports, did_you_know: [ ~s(that randomness in tests sucks?)]
