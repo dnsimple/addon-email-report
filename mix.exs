@@ -39,7 +39,7 @@ defmodule EmailReports.Mixfile do
       {:phoenix_html, "~> 2.6"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:dnsimple, git: "https://github.com/dnsimple/dnsimple-elixir.git"},
+      {:dnsimple, "~> 1.0"},
       {:swoosh, "~> 0.5.0"},
       {:phoenix_swoosh, "~> 0.1.3"},
       {:cowboy, "~> 1.0"},
