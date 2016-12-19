@@ -6,6 +6,9 @@ elixir:
 services:
   - postgresql
 
+addons:
+  postgresql: "9.4"
+
 deploy:
   provider: heroku
   app: addon-email-reports
