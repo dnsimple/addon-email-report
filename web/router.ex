@@ -22,6 +22,8 @@ defmodule EmailReports.Router do
     get "/", PageController, :index
     post "/", PageController, :send
 
+    post "/notify", WebhookController, :handle
+
     resources "/subscriptions", SubscriptionController
   end
 
