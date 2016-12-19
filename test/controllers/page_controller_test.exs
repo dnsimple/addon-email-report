@@ -24,7 +24,7 @@ defmodule EmailReports.PageControllerTest do
 
   test "shows unsubscribe when a active subscription exists", %{conn: conn} do
     account_id = String.to_integer conn.assigns[:current_account].dnsimple_account_id
-    subscription = Repo.insert! %Subscription{account_id: account_id}
+    _subscription = Repo.insert! %Subscription{account_id: account_id}
     conn = get conn, page_path(conn, :index)
     assert html_response(conn, 200) =~ "Unsubscribe"
   end
