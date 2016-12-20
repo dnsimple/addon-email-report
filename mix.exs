@@ -38,6 +38,7 @@ defmodule EmailReports.Mixfile do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.6"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:credo, "~> 0.5", only: [:dev, :test]},
       {:gettext, "~> 0.11"},
       {:dnsimple, "~> 1.0"},
       {:swoosh, "~> 0.5.0"},
