@@ -31,10 +31,12 @@ defmodule Mix.Tasks.Reports.Send do
 
     Logger.info "Sending mail to subscription id: #{subscription.id} (#{dnsimple_account.email})"
 
-    EmailReports.ReportEmail.simple(%{email: dnsimple_account.email, token: subscription.access_token})
+    %{email: dnsimple_account.email, token: subscription.access_token}
+    |> EmailReports.ReportEmail.simple
     |> EmailReports.Mailer.deliver
 
-    EmailReports.Subscription.changeset(subscription, %{last_sent: DateTime.utc})
+    subscription
+    |> EmailReports.Subscription.changeset(%{last_sent: DateTime.utc})
     |> Repo.update
   end
 

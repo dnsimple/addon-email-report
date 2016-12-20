@@ -6,7 +6,7 @@ defmodule EmailReports.Plug.CurrentAccount do
 
   def call(conn, _opts) do
     case current_account(conn) do
-      %{ :dnsimple_access_token => nil } ->
+      %{:dnsimple_access_token => nil} ->
         conn
         |> Phoenix.Controller.redirect(to: EmailReports.Router.Helpers.dnsimple_oauth_path(conn, :new))
         |> halt

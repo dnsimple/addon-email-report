@@ -1,6 +1,8 @@
 defmodule EmailReports.DnsimpleOauthController do
   use EmailReports.Web, :controller
 
+  require Logger
+
   def new(conn, _params) do
     client    = %Dnsimple.Client{}
     client_id = Application.fetch_env!(:email_reports, :dnsimple_client_id)
@@ -30,9 +32,8 @@ defmodule EmailReports.DnsimpleOauthController do
         |> put_session(:dnsimple_account_id, response.data.account_id)
         |> redirect(to: page_path(conn, :index))
       {:error, error} ->
-        IO.inspect(error)
+        Logger.warn(inspect error)
         raise "OAuth authentication failed: #{inspect error}"
     end
-
   end
 end

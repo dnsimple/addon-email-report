@@ -1,4 +1,6 @@
 defmodule EmailReports.Dnsimple do
+  require Logger
+
   # OAuth
 
   def authorize_url(client, client_id, options) do
@@ -15,7 +17,7 @@ defmodule EmailReports.Dnsimple do
     case identity_service.whoami(client(account)) do
       {:ok, response} -> response.data
       {:error, error} ->
-        IO.inspect(error)
+        Logger.warn(inspect error)
         raise "Failed to user account: #{inspect error}"
     end
   end
@@ -24,9 +26,9 @@ defmodule EmailReports.Dnsimple do
 
   def domains(account) do
     case domains_service.all_domains(client(account), account.dnsimple_account_id) do
-      {:ok, domains} -> domains
+      {:ok, all_domains} -> all_domains
       {:error, error} ->
-        IO.inspect(error)
+        Logger.warn(inspect error)
         raise "Failed to retrieve domains: #{inspect error}"
     end
   end
@@ -35,7 +37,7 @@ defmodule EmailReports.Dnsimple do
     case domains_service.get_domain(client(account), account.dnsimple_account_id, domain_id) do
       {:ok, response} -> response.data
       {:error, error} ->
-        IO.inspect(error)
+        Logger.warn(inspect error)
         raise "Failed to retrieve domain: #{inspect error}"
     end
   end
@@ -46,7 +48,7 @@ defmodule EmailReports.Dnsimple do
     case certificates_service.list_certificates(client(account), account.dnsimple_account_id, domain_name) do
       {:ok, response} -> response.data
       {:error, error} ->
-        IO.inspect(error)
+        Logger.warn(inspect error)
         raise "Failed to retrieve certificates: #{inspect error}"
     end
   end
@@ -55,7 +57,7 @@ defmodule EmailReports.Dnsimple do
     case certificates_service.get_certificate(client(account), account.dnsimple_account_id, domain_name, certificate_id) do
       {:ok, response} -> response.data
       {:error, error} ->
-        IO.inspect(error)
+        Logger.warn(inspect error)
         raise "Failed to get certificate: #{inspect error}"
     end
   end
@@ -72,7 +74,7 @@ defmodule EmailReports.Dnsimple do
     case certificates_service.download_certificate(client(account), account.dnsimple_account_id, domain_name, certificate_id) do
       {:ok, response} -> response.data
       {:error, error} ->
-        IO.inspect(error)
+        Logger.warn(inspect error)
         raise "Failed to download certificate: #{inspect error}"
     end
   end
@@ -81,7 +83,7 @@ defmodule EmailReports.Dnsimple do
     case certificates_service.get_certificate_private_key(client(account), account.dnsimple_account_id, domain_name, certificate_id) do
       {:ok, response} -> response.data
       {:error, error} ->
-        IO.inspect(error)
+        Logger.warn(inspect error)
         raise "Failed to get private key: #{inspect error}"
     end
   end
@@ -92,7 +94,7 @@ defmodule EmailReports.Dnsimple do
     case domains_service.list_email_forwards(client(account), account.dnsimple_account_id, domain_name) do
       {:ok, response} -> response.data
       {:error, error} ->
-        IO.inspect(error)
+        Logger.warn(inspect error)
         raise "Failed to get e-mail forwards: #{inspect error}"
     end
   end
@@ -103,7 +105,7 @@ defmodule EmailReports.Dnsimple do
     case services_service.applied_services(client(account), account.dnsimple_account_id, domain_name) do
       {:ok, response} -> response.data
       {:error, error} ->
-        IO.inspect(error)
+        Logger.warn(inspect error)
         raise "Failed to retrieve domain services: #{inspect error}"
     end
   end
@@ -112,7 +114,7 @@ defmodule EmailReports.Dnsimple do
     case services_service.apply_service(client(account), account.dnsimple_account_id, domain_name, service_id) do
       {:ok, _response} -> service_id
       {:error, error} ->
-        IO.inspect(error)
+        Logger.warn(inspect error)
         raise "Failed to apply service: #{inspect error}"
     end
   end
@@ -121,7 +123,7 @@ defmodule EmailReports.Dnsimple do
     case services_service.unapply_service(client(account), account.dnsimple_account_id, domain_name, service_id) do
       {:ok, _response} -> service_id
       {:error, error} ->
-        IO.inspect(error)
+        Logger.warn(inspect error)
         raise "Failed to unapply service: #{inspect error}"
     end
   end
@@ -132,7 +134,7 @@ defmodule EmailReports.Dnsimple do
     case zones_service.list_zone_records(client(account), account.dnsimple_account_id, zone_name) do
       {:ok, response} -> response.data
       {:error, error} ->
-        IO.inspect(error)
+        Logger.warn(inspect error)
         raise "Failed to get records: #{inspect error}"
     end
   end
@@ -162,7 +164,7 @@ defmodule EmailReports.Dnsimple do
     case webhooks_service.create_webhook(client(account), account.dnsimple_account_id, %{url: webhook_url}) do
       {:ok, response} -> response.data
       {:error, error} ->
-        IO.inspect(error)
+        Logger.warn(inspect error)
         raise "Failed to create webhook: #{inspect error}"
     end
   end
@@ -175,7 +177,7 @@ defmodule EmailReports.Dnsimple do
     case webhooks_service.delete_webhook(client(account), account.dnsimple_account_id, webhook_id) do
       {:ok, response} -> response.data
       {:error, error} ->
-        IO.inspect(error)
+        Logger.warn(inspect error)
         raise "Failed to delete webhook: #{inspect error}"
     end
   end

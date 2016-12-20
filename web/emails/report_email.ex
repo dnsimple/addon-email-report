@@ -6,7 +6,8 @@ defmodule EmailReports.ReportEmail do
 
   def simple(user) do
     account = build_accout user.token
-    domains = Dnsimple.domains(account)
+    domains = account
+    |> Dnsimple.domains
     |> Enum.map(&(Task.async(__MODULE__, :enrich_domain, [&1, account])))
     |> Enum.map(&Task.await/1)
 
@@ -37,7 +38,7 @@ defmodule EmailReports.ReportEmail do
     fwd_task = Task.async(fn -> Dnsimple.email_forwards(account, domain.name) end)
     {
       domain,
-      Task.await(certs_task) |> Enum.filter(&(active_certificate?(&1))),
+      certs_task |> Task.await |> Enum.filter(&(active_certificate?(&1))),
       Task.await(fwd_task)
     }
   end
@@ -47,14 +48,16 @@ defmodule EmailReports.ReportEmail do
   end
 
   def filter_expiring_certificates(certs) do
-    Enum.filter(certs, fn cert -> length(cert) > 0 end)
+    certs
+    |> Enum.filter(fn cert -> length(cert) > 0 end)
     |> Enum.flat_map(&(&1))
     |> Enum.filter(&(expires_within_next_month?(&1.expires_on)))
   end
 
   defp expires_within_next_month?(date) when is_binary(date) do
     next_month = Timex.add(DateTime.utc_now, Duration.from_days(30))
-    Date.from_iso8601!(date)
+    date
+    |> Date.from_iso8601!
     |> Timex.compare(next_month)
     |> Kernel.<(0)
   end
