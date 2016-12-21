@@ -46,7 +46,5 @@ config :email_reports, EmailReports.Repo,
 config :email_reports, EmailReports.Mailer,
   adapter: Swoosh.Adapters.Local
 
-# Configure 3rd parties
-config :email_reports,
-  dnsimple_client_id: "bbf472f1dcc6d611",
-  dnsimple_client_secret: "JHIKTQjbzCtoBlf0TKpvE1B7jj0DzdrZ"
+# Finally import the config/dev.secret.exs
+import_config "dev.secret.exs"

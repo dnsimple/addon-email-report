@@ -1,6 +1,12 @@
 # DNSimple E-Mail Reports add-on
 
-This is a [DNSimple add-on](https://developer.dnsimple.com) to send out montly reports to all users optin-in into this add-on.
+This is a [DNSimple add-on](https://developer.dnsimple.com) to send out monthly reports to all users opt-in into this add-on.
+
+## Configuration
+
+After cloning this repo please copy the example dev secrets and adjust it to your tokens:
+- `cp config/dev.secret.exs-example config/dev.secret.exs`
+- `emacs config/dev.secret.exs`
 
 ## Development
 
