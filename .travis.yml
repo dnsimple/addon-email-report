@@ -9,6 +9,9 @@ services:
 addons:
   postgresql: "9.4"
 
+before_install:
+  - cp config/dev.secret.exs-example config/dev.secret.exs
+
 deploy:
   provider: heroku
   app: addon-email-reports
