@@ -2,7 +2,7 @@
 <ol>
 <%= Enum.map @domains, fn {domain, certs, forwards} -> %>
     <li>
-    <h2><%= domain.name %></h2><small><%= domain.state %></small>
+    <h2><%= domain.unicode_name %></h2><small><%= domain.state %></small>
     <p><a href="<%= manage_url(domain) %>">Manage domain</a></p>
     <%= if domain.state == "registered" do %>
     <p>
