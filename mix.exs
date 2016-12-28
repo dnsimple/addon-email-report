@@ -40,7 +40,8 @@ defmodule EmailReports.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:credo, "~> 0.5", only: [:dev, :test]},
       {:gettext, "~> 0.11"},
-      {:dnsimple, "~> 1.0"},
+      # Go back to original hex pkg when https://github.com/dnsimple/dnsimple-elixir/pull/105 is merged
+      {:dnsimple, github: "nesQuick/dnsimple-elixir", branch: "unicode-domain-name"},
       {:swoosh, "~> 0.5.0"},
       {:phoenix_swoosh, "~> 0.1.3"},
       {:cowboy, "~> 1.0"},
