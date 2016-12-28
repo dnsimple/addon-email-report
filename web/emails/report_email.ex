@@ -54,6 +54,7 @@ defmodule EmailReports.ReportEmail do
     |> Enum.filter(&(expires_within_next_month?(&1.expires_on)))
   end
 
+  defp expires_within_next_month?(nil), do: false
   defp expires_within_next_month?(date) when is_binary(date) do
     next_month = Timex.add(DateTime.utc_now, Duration.from_days(30))
     date
