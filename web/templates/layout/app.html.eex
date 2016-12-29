@@ -20,7 +20,9 @@
           DNSimple E-Mail Reports
         </div>
         <div class="dn-navbar-nav container">
-          <a href="#" class="dn-link-primary mh2">Logout</a>
+          <%= if @conn.assigns[:current_account] do %>
+          <%= link("Logout", to: logout_path(@conn, :logout), method: :post) %>
+          <% end %>
         </div>
       </header>
 
