@@ -4,10 +4,7 @@ defmodule EmailReports.WebhookController do
   alias EmailReports.Webhook
 
   def handle(conn, params) do
-    # This hack can be deleted as soon as this PR gets merged and released:
-    # https://github.com/elixir-ecto/postgrex/pull/271
-    # Then you'd have: changeset = Webhook.changeset(%Webhook{account_id: params["account"]["id"]}, params)
-    {:ok, req_id} = params["request_identifier"] |> String.replace("-", "") |> String.upcase |> Base.decode16
+    {:ok, req_id} = to_binary_uuid params["request_identifier"]
     changeset = Webhook.changeset(%Webhook{account_id: params["account"]["id"]}, %{params | "request_identifier" => req_id})
     case Repo.insert(changeset) do
       {:ok, _webhook} ->
@@ -17,5 +14,10 @@ defmodule EmailReports.WebhookController do
     end
   end
 
-
+  defp to_binary_uuid(request_identifier) do
+    request_identifier
+    |> String.replace("-", "")
+    |> String.upcase
+    |> Base.decode16
+  end
 end
