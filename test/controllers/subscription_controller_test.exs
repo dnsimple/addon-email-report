@@ -5,16 +5,6 @@ defmodule EmailReports.SubscriptionControllerTest do
   @valid_attrs %{access_token: "some content", account_id: 42, last_sent: %{day: 17, hour: 14, min: 0, month: 4, sec: 0, year: 2010}}
   @invalid_attrs %{}
 
-  test "lists all entries on index", %{conn: conn} do
-    conn = get conn, subscription_path(conn, :index)
-    assert html_response(conn, 200) =~ "Listing subscriptions"
-  end
-
-  test "renders form for new resources", %{conn: conn} do
-    conn = get conn, subscription_path(conn, :new)
-    assert html_response(conn, 200) =~ "New subscription"
-  end
-
   test "creates resource and redirects when data is valid", %{conn: conn} do
     conn = post conn, subscription_path(conn, :create), subscription: @valid_attrs
     assert redirected_to(conn) == page_path(conn, :index)
@@ -23,38 +13,8 @@ defmodule EmailReports.SubscriptionControllerTest do
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
     conn = post conn, subscription_path(conn, :create), subscription: @invalid_attrs
-    assert html_response(conn, 200) =~ "New subscription"
-  end
-
-  test "shows chosen resource", %{conn: conn} do
-    subscription = Repo.insert! %Subscription{}
-    conn = get conn, subscription_path(conn, :show, subscription)
-    assert html_response(conn, 200) =~ "Show subscription"
-  end
-
-  test "renders page not found when id is nonexistent", %{conn: conn} do
-    assert_error_sent 404, fn ->
-      get conn, subscription_path(conn, :show, -1)
-    end
-  end
-
-  test "renders form for editing chosen resource", %{conn: conn} do
-    subscription = Repo.insert! %Subscription{}
-    conn = get conn, subscription_path(conn, :edit, subscription)
-    assert html_response(conn, 200) =~ "Edit subscription"
-  end
-
-  test "updates chosen resource and redirects when data is valid", %{conn: conn} do
-    subscription = Repo.insert! %Subscription{}
-    conn = put conn, subscription_path(conn, :update, subscription), subscription: @valid_attrs
-    assert redirected_to(conn) == subscription_path(conn, :show, subscription)
-    assert Repo.get_by(Subscription, @valid_attrs)
-  end
-
-  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-    subscription = Repo.insert! %Subscription{}
-    conn = put conn, subscription_path(conn, :update, subscription), subscription: @invalid_attrs
-    assert html_response(conn, 200) =~ "Edit subscription"
+    assert redirected_to(conn) == page_path(conn, :index)
+    assert get_flash(conn, :error) == "Subscription could not be created."
   end
 
   test "deletes chosen resource", %{conn: conn} do

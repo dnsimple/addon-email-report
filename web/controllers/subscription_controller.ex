@@ -3,16 +3,6 @@ defmodule EmailReports.SubscriptionController do
 
   alias EmailReports.Subscription
 
-  def index(conn, _params) do
-    subscriptions = Repo.all(Subscription)
-    render(conn, "index.html", subscriptions: subscriptions)
-  end
-
-  def new(conn, _params) do
-    changeset = Subscription.changeset(%Subscription{})
-    render(conn, "new.html", changeset: changeset)
-  end
-
   def create(conn, %{"subscription" => subscription_params}) do
     changeset = Subscription.changeset(%Subscription{}, subscription_params)
 
@@ -21,33 +11,10 @@ defmodule EmailReports.SubscriptionController do
         conn
         |> put_flash(:info, "Subscription created successfully. You will receive your first report shortly.")
         |> redirect(to: page_path(conn, :index))
-      {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
-    end
-  end
-
-  def show(conn, %{"id" => id}) do
-    subscription = Repo.get!(Subscription, id)
-    render(conn, "show.html", subscription: subscription)
-  end
-
-  def edit(conn, %{"id" => id}) do
-    subscription = Repo.get!(Subscription, id)
-    changeset = Subscription.changeset(subscription)
-    render(conn, "edit.html", subscription: subscription, changeset: changeset)
-  end
-
-  def update(conn, %{"id" => id, "subscription" => subscription_params}) do
-    subscription = Repo.get!(Subscription, id)
-    changeset = Subscription.changeset(subscription, subscription_params)
-
-    case Repo.update(changeset) do
-      {:ok, subscription} ->
+      {:error, _changeset} ->
         conn
-        |> put_flash(:info, "Subscription updated successfully.")
-        |> redirect(to: subscription_path(conn, :show, subscription))
-      {:error, changeset} ->
-        render(conn, "edit.html", subscription: subscription, changeset: changeset)
+        |> put_flash(:error, "Subscription could not be created.")
+        |> redirect(to: page_path(conn, :index))
     end
   end
 

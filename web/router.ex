@@ -27,7 +27,7 @@ defmodule EmailReports.Router do
 
     post "/notify", WebhookController, :handle
 
-    resources "/subscriptions", SubscriptionController
+    resources "/subscriptions", SubscriptionController, only: [:create, :delete]
   end
 
   if Mix.env == :dev do
