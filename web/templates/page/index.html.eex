@@ -1,34 +1,36 @@
 <h2>Your personal regular DNSimple report!</h2>
 <p>E-mail address on file: <%= @email %></p>
 
-<div class="row">
-  <div class="col-md-6">
+<div class="cf">
+  <div class="fl w-50 pa2">
+    <div class="tc">
+      <h3>Manage monthly report</h3>
 
-    <h3>Monthly report</h3>
-
-    <%= if @subscription do %>
-      <p> You are subscribed already 🎉</p>
-      <p> Since: <%= @subscription.inserted_at %></p>
-      <%= if @subscription.last_sent do %> We sent the last report: <%= @subscription.last_sent %><% end %>
-      <%= link "Unsubscribe", to: subscription_path(@conn, :delete, @subscription), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
-    <% else %>
-      <%= render EmailReports.SubscriptionView, "form.html", changeset: @changeset,
-      action: subscription_path(@conn, :create) %>
-    <% end %>
-
+      <%= if @subscription do %>
+        <p> You are already subscribed 🎉</p>
+        <p> Since: <%= @subscription.inserted_at %></p>
+        <%= if @subscription.last_sent do %> We sent the last report: <%= @subscription.last_sent %><% end %>
+        <%= link "Unsubscribe", to: subscription_path(@conn, :delete, @subscription), method: :delete, data: [confirm: "Are you sure?"], class: "dn-btn-primary" %>
+      <% else %>
+        <%= render EmailReports.SubscriptionView, "form.html", changeset: @changeset,
+        action: subscription_path(@conn, :create) %>
+      <% end %>
+    </div>
   </div>
-  <div class="col-md-6">
-    <h3>Request one-time report</h3>
+  <div class="fl w-50 pa2">
+    <div class="tc">
+      <h3>Request one-time report</h3>
 
-    <%= form_for @conn, page_path(@conn, :send), [as: :report_params], fn f -> %>
-    <div class="form-group">
-      <%= hidden_input f, :email, value: @email, class: "form-control" %>
-      <%= error_tag f, :email %>
-    </div>
+      <%= form_for @conn, page_path(@conn, :send), [as: :report_params], fn f -> %>
+      <div>
+        <%= hidden_input f, :email, value: @email %>
+        <%= error_tag f, :email %>
+      </div>
 
-    <div class="form-group">
-      <%= submit "Get a one-time report!", class: "btn btn-primary" %>
+      <div>
+        <%= submit "Get a one-time report!", class: "dn-btn-lg-primary" %>
+      </div>
+      <% end %>
     </div>
-    <% end %>
   </div>
 </div>
