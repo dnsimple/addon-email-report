@@ -13,31 +13,29 @@
   </head>
 
   <body class="dn-body">
-    <div class="container">
 
-      <header class="dn-navbar">
-        <div class="dn-navbar-branding ph3">
-          DNSimple E-Mail Reports
-        </div>
-        <div class="dn-navbar-nav container">
-          <%= if @conn.assigns[:current_account] do %>
-          <%= link("Logout", to: logout_path(@conn, :logout), method: :post) %>
-          <% end %>
-        </div>
-      </header>
+    <header class="dn-navbar pa3 mb4">
+      <div class="dn-navbar-branding">
+        DNSimple E-Mail Reports
+      </div>
+      <div class="dn-navbar-nav">
+        <%= if @conn.assigns[:current_account] do %>
+        <%= link("Logout", to: logout_path(@conn, :logout), method: :post, class: "dn-link-primary mh2") %>
+        <% end %>
+      </div>
+    </header>
 
-      <%= if info = get_flash(@conn, :info) do %>
-      <div class="dn-alert-info"><span><%= info %></span></div>
-      <% end %>
-      <%= if error = get_flash(@conn, :error) do %>
-      <div class="dn-alert-danger"><span><%= error %></span></div>
-      <% end %>
+    <%= if info = get_flash(@conn, :info) do %>
+    <div class="dn-alert-info"><span><%= info %></span></div>
+    <% end %>
+    <%= if error = get_flash(@conn, :error) do %>
+    <div class="dn-alert-danger"><span><%= error %></span></div>
+    <% end %>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+    <main role="main" class="container">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
 
-    </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

@@ -14,7 +14,7 @@ defmodule EmailReports.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"
-    assert html_response(conn, 200) =~ "Your personal regular DNSimple report!"
+    assert html_response(conn, 200) =~ "Scheduled Report"
   end
 
   test "shows subscribe form when no active subscription exists", %{conn: conn} do
