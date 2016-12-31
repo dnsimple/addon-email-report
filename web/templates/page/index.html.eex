@@ -1,5 +1,5 @@
 <div class="cf">
-  <div class="fl w-50 pa3">
+  <div class="fl w-50-ns pa3">
     <div class="pa2 h5 dn-card">
       <h3>Instant Report</h3>
 
@@ -17,7 +17,7 @@
       <% end %>
     </div>
   </div>
-  <div class="fl w-50 pa3">
+  <div class="fl w-50-ns pa3">
     <div class="pa2 h5 dn-card">
       <h3>Scheduled Report</h3>
 
