@@ -9,7 +9,6 @@
 
     <title>DNSimple E-Mail reports</title>
     <link rel="stylesheet" href="https://make-it-nice.dnsimple.com/css/dnsimple-tachyons-1.0.0.min.css">
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body class="dn-body">
@@ -25,12 +24,14 @@
       </div>
     </header>
 
-    <%= if info = get_flash(@conn, :info) do %>
-    <div class="dn-alert-info"><span><%= info %></span></div>
-    <% end %>
-    <%= if error = get_flash(@conn, :error) do %>
-    <div class="dn-alert-danger"><span><%= error %></span></div>
-    <% end %>
+    <div class="mw8 center">
+      <%= if info = get_flash(@conn, :info) do %>
+      <div class="dn-alert-info"><span><%= info %></span></div>
+      <% end %>
+      <%= if error = get_flash(@conn, :error) do %>
+      <div class="dn-alert-danger"><span><%= error %></span></div>
+      <% end %>
+    </div>
 
     <main role="main" class="container">
       <%= render @view_module, @view_template, assigns %>
