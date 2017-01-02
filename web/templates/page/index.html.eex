@@ -4,7 +4,7 @@
       <div class="pa2 dn-card">
         <h3>Instant Report</h3>
 
-        <p>Receive a email in the next few seconds  with your domains. Like you would have been subscribed for a month already.</p>
+        <p class="measure">Receive a email in the next few seconds  with your domains. Like you would have been subscribed for a month already.</p>
 
         <%= form_for @conn, page_path(@conn, :send), [as: :report_params], fn f -> %>
         <div>
