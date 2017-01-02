@@ -1,10 +1,10 @@
-<div class="mw8 center">
+<div class="mw8 center lh-copy">
   <div class="cf">
     <div class="fl w-50-l pa3">
-      <div class="pa2 h5-l dn-card relative">
+      <div class="pa2 dn-card">
         <h3>Instant Report</h3>
 
-        <p>Receive a email in the next few seconds in your inbox with the status report as you would have been subscribed for a month already.</p>
+        <p>Receive a email in the next few seconds  with your domains. Like you would have been subscribed for a month already.</p>
 
         <%= form_for @conn, page_path(@conn, :send), [as: :report_params], fn f -> %>
         <div>
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="fl w-50-l pa3">
-      <div class="pa2 h5-l dn-card">
+      <div class="pa2 dn-card">
         <h3>Scheduled Report</h3>
 
         <p>A monthly report of your domains <strong>every month</strong>. Right in your inbox.</p>
