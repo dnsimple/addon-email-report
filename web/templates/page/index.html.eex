@@ -1,37 +1,39 @@
-<div class="cf">
-  <div class="fl w-50-ns pa3">
-    <div class="pa2 h5-l dn-card relative">
-      <h3>Instant Report</h3>
+<div class="mw8 center">
+  <div class="cf">
+    <div class="fl w-50-l pa3">
+      <div class="pa2 h5-l dn-card relative">
+        <h3>Instant Report</h3>
 
-      <p>Receive a email in the next few seconds in your inbox with the status report as you would have been subscribed for a month already.</p>
+        <p>Receive a email in the next few seconds in your inbox with the status report as you would have been subscribed for a month already.</p>
 
-      <%= form_for @conn, page_path(@conn, :send), [as: :report_params], fn f -> %>
-      <div>
-        <%= error_tag f, :email %>
-        <p>Sent to <%= text_input f, :email, value: @email, class: "bn email-inline", size: "30" %><span class="i"> (click to edit)</span></p>
+        <%= form_for @conn, page_path(@conn, :send), [as: :report_params], fn f -> %>
+        <div>
+          <%= error_tag f, :email %>
+          <p>Sent to <%= text_input f, :email, value: @email, class: "bn email-inline", size: "30" %><span class="i"> (click to edit)</span></p>
+        </div>
+
+        <div class="pt3">
+          <%= submit "Send", class: "dn-btn-primary" %>
+        </div>
+        <% end %>
       </div>
-
-      <div class="pt4">
-        <%= submit "Send", class: "dn-btn-primary" %>
-      </div>
-      <% end %>
     </div>
-  </div>
-  <div class="fl w-50-ns pa3">
-    <div class="pa2 h5-l dn-card">
-      <h3>Scheduled Report</h3>
+    <div class="fl w-50-l pa3">
+      <div class="pa2 h5-l dn-card">
+        <h3>Scheduled Report</h3>
 
-      <p>A monthly report of your domains <strong>every month</strong>. Right in your inbox.</p>
+        <p>A monthly report of your domains <strong>every month</strong>. Right in your inbox.</p>
 
-      <%= if @subscription do %>
-        <p>✅ Sent to <%= @email %></p>
-        <%= if @subscription.last_sent do %><p>We sent the last report: <%= @subscription.last_sent %></p><% end %>
-        <%= link "Unsubscribe", to: subscription_path(@conn, :delete, @subscription), method: :delete, data: [confirm: "Are you sure?"], class: "pa3 dn-btn-lg bg-red white", form: [class: "pa3 link tc"] %>
-      <% else %>
-        <p>Sent to <%= @email %></p>
-        <%= render EmailReports.SubscriptionView, "form.html", changeset: @changeset,
-        action: subscription_path(@conn, :create) %>
-      <% end %>
+        <%= if @subscription do %>
+          <p>✅ Sent to <%= @email %></p>
+          <%= if @subscription.last_sent do %><p>We sent the last report: <%= @subscription.last_sent %></p><% end %>
+          <%= link "Unsubscribe", to: subscription_path(@conn, :delete, @subscription), method: :delete, data: [confirm: "Are you sure?"], class: "pa3 dn-btn-lg bg-red white", form: [class: "pa3 link tc"] %>
+        <% else %>
+          <p>Sent to <%= @email %></p>
+          <%= render EmailReports.SubscriptionView, "form.html", changeset: @changeset,
+          action: subscription_path(@conn, :create) %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
