@@ -1,6 +1,6 @@
 <div class="cf">
   <div class="fl w-50-ns pa3">
-    <div class="pa2 h5 dn-card">
+    <div class="pa2 h5-l dn-card">
       <h3>Instant Report</h3>
 
       <p>Receive a email in the next few seconds in your inbox with the status report as you would have been subscribed for a month already.</p>
@@ -18,7 +18,7 @@
     </div>
   </div>
   <div class="fl w-50-ns pa3">
-    <div class="pa2 h5 dn-card">
+    <div class="pa2 h5-l dn-card">
       <h3>Scheduled Report</h3>
 
       <p>A monthly report of your domains <strong>every month</strong>. Right in your inbox.</p>
