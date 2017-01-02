@@ -15,7 +15,5 @@
     <%= error_tag f, :access_token %>
   </div>
 
-  <div class="pt3">
-    <%= submit "Subscribe", class: "dn-btn-primary" %>
-  </div>
+  <%= submit "Subscribe", class: "dn-btn-primary" %>
 <% end %>

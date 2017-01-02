@@ -12,7 +12,7 @@
           <p>Sent to <%= text_input f, :email, value: @email, class: "bn email-inline", size: "30" %><span class="i"> (click to edit)</span></p>
         </div>
 
-        <div class="pt3">
+        <div class="pv3">
           <%= submit "Send", class: "dn-btn-primary" %>
         </div>
         <% end %>
@@ -27,7 +27,9 @@
         <%= if @subscription do %>
           <p>✅ Sent to <%= @email %></p>
           <%= if @subscription.last_sent do %><p>We sent the last report: <%= @subscription.last_sent %></p><% end %>
-          <%= link "Unsubscribe", to: subscription_path(@conn, :delete, @subscription), method: :delete, data: [confirm: "Are you sure?"], class: "pa3 dn-btn-lg bg-red white", form: [class: "pa3 link tc"] %>
+          <div class="pv2">
+            <%= link "Unsubscribe", to: subscription_path(@conn, :delete, @subscription), method: :delete, data: [confirm: "Are you sure?"], class: "dn-btn bg-red white", form: [class: "pv3"] %>
+          </div>
         <% else %>
           <p>Sent to <%= @email %></p>
           <%= render EmailReports.SubscriptionView, "form.html", changeset: @changeset,
