@@ -3,38 +3,39 @@
     <div class="fl w-50-l pa3 w-100">
       <div class="pa2 dn-card">
         <h3 class="f3 fw4 mv1">Instant Report</h3>
-
         <p class="measure">Receive a email in the next few seconds with your domains.</p>
-
-        <%= form_for @conn, page_path(@conn, :send), [as: :report_params], fn f -> %>
-        <div>
-          <%= error_tag f, :email %>
-          <p>Send to <%= text_input f, :email, value: @email, class: "dn-input" %></p>
+        <div class="h3-l">
+          <%= form_for @conn, page_path(@conn, :send), [as: :report_params], fn f -> %>
+            <%= error_tag f, :email %>
+            <p>Send to <%= text_input f, :email, value: @email, class: "dn-input" %></p>
+          <% end %>
         </div>
-
         <div class="pv3">
           <%= submit "Send", class: "dn-btn-primary" %>
         </div>
-        <% end %>
       </div>
     </div>
     <div class="fl w-50-l pa3 w-100">
       <div class="pa2 dn-card">
         <h3 class="f3 fw4 mv1">Scheduled Report</h3>
-
         <p>A monthly report of your domains <strong>every month</strong>.</p>
-
-        <%= if @subscription do %>
-          <p>✅ Sent to <%= @email %></p>
-          <%= if @subscription.last_sent do %><p>We sent the last report: <%= @subscription.last_sent %></p><% end %>
-          <div class="pv2">
-            <%= link "Unsubscribe", to: subscription_path(@conn, :delete, @subscription), method: :delete, data: [confirm: "Are you sure?"], class: "dn-btn bg-red white", form: [class: "pv3"] %>
-          </div>
-        <% else %>
-          <p>Sent to <%= @email %></p>
-          <%= render EmailReports.SubscriptionView, "form.html", changeset: @changeset,
-          action: subscription_path(@conn, :create) %>
-        <% end %>
+        <div class="h3-l">
+          <%= if @subscription do %>
+            <span>✅ Sent to <%= @email %></span>
+            <% if @subscription.last_sent do %>
+              <span class="db gray pb1">Last sent on: <%= @subscription.last_sent %></span>
+            <% end %>
+          <% else %>
+            <p>Sent to <%= @email %></p>
+          <% end %>
+        </div>
+        <div class="pv3">
+          <%= if @subscription do %>
+            <%= link "Unsubscribe", to: subscription_path(@conn, :delete, @subscription), method: :delete, data: [confirm: "Are you sure?"], class: "dib dn-btn bg-red white", form: [class: ""] %>
+          <% else %>
+            <%= render EmailReports.SubscriptionView, "form.html", changeset: @changeset, action: subscription_path(@conn, :create) %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
