@@ -4,15 +4,15 @@
       <div class="pa2 dn-card">
         <h3 class="f3 fw4 mv1">Instant Report</h3>
         <p class="measure">Receive a email in the next few seconds with your domains.</p>
-        <div class="h3-l">
           <%= form_for @conn, page_path(@conn, :send), [as: :report_params], fn f -> %>
+          <div class="h3-l">
             <%= error_tag f, :email %>
             <p>Send to <%= text_input f, :email, value: @email, class: "dn-input" %></p>
+          </div>
+          <div class="pv3">
+            <%= submit "Send", class: "dn-btn-primary" %>
+          </div>
           <% end %>
-        </div>
-        <div class="pv3">
-          <%= submit "Send", class: "dn-btn-primary" %>
-        </div>
       </div>
     </div>
     <div class="fl w-50-l pa3 w-100">
