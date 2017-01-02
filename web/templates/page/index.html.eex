@@ -1,6 +1,6 @@
 <div class="mw8 center lh-copy">
   <div class="cf">
-    <div class="fl w-50-l pa3">
+    <div class="fl w-50-l pa3 w-100">
       <div class="pa2 dn-card">
         <h3>Instant Report</h3>
 
@@ -18,7 +18,7 @@
         <% end %>
       </div>
     </div>
-    <div class="fl w-50-l pa3">
+    <div class="fl w-50-l pa3 w-100">
       <div class="pa2 dn-card">
         <h3>Scheduled Report</h3>
 
