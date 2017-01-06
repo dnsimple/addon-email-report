@@ -8,6 +8,6 @@ config :email_reports, did_you_know: [
   ~s(that there are only 13 root servers named from A up to M?),
   ~s(that each day almost 100,000 domains are newly registered?),
   ~s(that until 1995 domain name registration were free?),
-  ~s(that since 1997 all threeletter .com domainsa are sold?),
+  ~s(that since 1997 all threeletter .com domains are sold?),
   ~s(that the most expensive domain ever sold was worth $35 million?)
 ]
