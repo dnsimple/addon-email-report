@@ -1,11 +1,31 @@
-<div>
-  <h1>We ❤️ DNS</h1>
-  <h2>Thanks for being a customer <%= @user.email %>!</h2>
-</div>
-
-<%= render "domains.html", domains: @domains %>
-<%= render "expires.html", domains: @expiring_domains, certificates: @expiring_domains %>
-
-<p>
-  <small>Did you know <%= @did_you_know %></small>
-</p>
+<table cellspacing="0" cellpadding="0" width="100%" style="padding: 25px 0;font-family: sans-serif;">
+  <tr>
+    <td></td>
+    <td width="600" align="center" valign="top">
+      <table cellpadding="0" cellspacing="0" style="padding: 25px;">
+        <tr>
+          <td>
+            <a href="https://dnsimple.com"><img src="https://cdn.dnsimple.com/assets/emails/dnsimple-logo.png" style="width: 110px;" alt="DNSimple" /></a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= render "domains.html", domains: @domains %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= render "expires.html", domains: @expiring_domains, certificates: @expiring_domains %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Thanks for being a customer <%= @user.email %></p>
+            <p>Did you know <%= @did_you_know %></p>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td></td>
+  </tr>
+</table>
