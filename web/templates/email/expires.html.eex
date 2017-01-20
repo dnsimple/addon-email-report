@@ -18,7 +18,7 @@
             </tr>
             <%= Enum.map @domains, fn domain -> %>
               <tr>
-                <td><strong><%= domain.name %></strong></td>
+                <td style="width: 60%;"><strong><%= domain.name %></strong></td>
                 <td style="color: #835F5F;">expires on</td>
                 <td><strong><%= domain.expires_on %></strong></td>
               </tr>
@@ -36,7 +36,7 @@
             </tr>
             <%= Enum.map @certificates, fn certificate -> %>
               <tr>
-                <td><strong><%= certificate.common_name %></strong></td>
+                <td style="width: 60%;"><strong><%= certificate.common_name %></strong></td>
                 <td style="color: #835F5F;">expires on</td>
                 <td><strong><%= certificate.expires_on %></strong></td>
               </tr>
