@@ -6,16 +6,17 @@
         <tr>
           <td>
             <a href="https://dnsimple.com"><img src="https://cdn.dnsimple.com/assets/emails/dnsimple-logo.png" style="width: 110px;" alt="DNSimple" /></a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= render "domains.html", domains: @domains %>
+            <p style="padding: 20px 0;"><strong>Your monthly email report from DNSimple.</strong> You have <%= length(@domains)%> domains.</p>
           </td>
         </tr>
         <tr>
           <td>
             <%= render "expires.html", domains: @expiring_domains, certificates: @expiring_domains %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= render "domains.html", domains: @domains %>
           </td>
         </tr>
         <tr>

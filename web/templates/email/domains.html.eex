@@ -1,87 +1,84 @@
-<div style="padding: 25px 0;">
-  <p><strong>Your monthly email report from DNSimple.</strong> You have <%= length(@domains)%> domains.</p>
-  <%= Enum.map @domains, fn {domain, certs, forwards} -> %>
-    <table width="100%" cellpadding="10px" cellspacing="10px" style="margin-bottom: 15px; background-color: #fafafa">
-      <tr>
-        <td><strong style="font-size: 21px;"><%= domain.unicode_name %></strong></td>
-      </tr>
-      <tr>
-        <td width="100">
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
+<%= Enum.map @domains, fn {domain, certs, forwards} -> %>
+  <table width="100%" cellpadding="10px" cellspacing="10px" style="margin-bottom: 15px; background-color: #fafafa">
+    <tr>
+      <td><strong style="font-size: 21px;"><%= domain.unicode_name %></strong></td>
+    </tr>
+    <tr>
+      <td width="100">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td>
+              <span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">STATUS</span>
+              <p style="margin: 2px 0;"><strong><%= domain.state %></strong></p>
+            </td>
+            <%= if domain.state == "registered" do %>
               <td>
-                <span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">STATUS</span>
-                <p style="margin: 2px 0;"><strong><%= domain.state %></strong></p>
+                <span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">EXPIRES</span>
+                <p style="margin: 2px 0;"><strong><%= expires(domain.expires_on) %></strong></p>
               </td>
-              <%= if domain.state == "registered" do %>
-                <td>
-                  <span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">EXPIRES</span>
-                  <p style="margin: 2px 0;"><strong><%= expires(domain.expires_on) %></strong></p>
-                </td>
-                <td>
-                  <span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">AUTO-RENEW</span>
-                  <p style="margin: 2px 0;"><strong><%= auto_renew(domain.auto_renew) %></strong></p>
-                </td>
-              <% end %>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">SSL-CERTIFICATES</span>
-          <%= if length(certs) > 0 do %>
-            <%= Enum.map certs, fn cert -> %>
-              <table width="100%" cellpadding="2px" cellspacing="2px" style="margin: 10px;">
-                <tr>
-                  <td><span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">NAME</span></td>
-                  <td><strong><%= cert.common_name %></strong></td>
-                </tr>
-                <tr>
-                  <td><span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">ISSUER</span></td>
-                  <td><strong><%= cert.authority_identifier %></strong></td>
-                </tr>
-                <tr>
-                  <td><span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">STATE</span></td>
-                  <td><strong><%= cert.state %></strong></td>
-                </tr>
-                <tr>
-                  <td><span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">EXPIRES</span></td>
-                  <td><strong><%= expires(cert.expires_on) %></strong></td>
-                </tr>
-              </table>
+              <td>
+                <span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">AUTO-RENEW</span>
+                <p style="margin: 2px 0;"><strong><%= auto_renew(domain.auto_renew) %></strong></p>
+              </td>
             <% end %>
-          <% else %>
-            <p style="margin: 2px 0;"><strong>None</strong></p>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">SSL-CERTIFICATES</span>
+        <%= if length(certs) > 0 do %>
+          <%= Enum.map certs, fn cert -> %>
+            <table width="100%" cellpadding="2px" cellspacing="2px" style="margin: 10px;">
+              <tr>
+                <td><span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">NAME</span></td>
+                <td><strong><%= cert.common_name %></strong></td>
+              </tr>
+              <tr>
+                <td><span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">ISSUER</span></td>
+                <td><strong><%= cert.authority_identifier %></strong></td>
+              </tr>
+              <tr>
+                <td><span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">STATE</span></td>
+                <td><strong><%= cert.state %></strong></td>
+              </tr>
+              <tr>
+                <td><span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">EXPIRES</span></td>
+                <td><strong><%= expires(cert.expires_on) %></strong></td>
+              </tr>
+            </table>
           <% end %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">EMAIL FORWARDS</span>
-          <%= if length(forwards) > 0 do %>
-            <%= Enum.map forwards, fn forward -> %>
-              <table width="100%" cellpadding="2px" cellspacing="2px" style="margin: 10px;">
-                <tr>
-                  <td><span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">FROM</span></td>
-                  <td><strong><%= forward.from %></strong></td>
-                </tr>
-                <tr>
-                  <td><span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">TO</span></td>
-                  <td><strong><%= forward.to %></strong></td>
-                </tr>
-              </table>
-            <% end %>
-          <% else %>
-            <p style="margin: 2px 0;"><strong>None</strong></p>
+        <% else %>
+          <p style="margin: 2px 0;"><strong>None</strong></p>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">EMAIL FORWARDS</span>
+        <%= if length(forwards) > 0 do %>
+          <%= Enum.map forwards, fn forward -> %>
+            <table width="100%" cellpadding="2px" cellspacing="2px" style="margin: 10px;">
+              <tr>
+                <td><span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">FROM</span></td>
+                <td><strong><%= forward.from %></strong></td>
+              </tr>
+              <tr>
+                <td><span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">TO</span></td>
+                <td><strong><%= forward.to %></strong></td>
+              </tr>
+            </table>
           <% end %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a href="<%= manage_url(domain) %>" style="color: #1A5EC6;">Manage domain</a>
-        </td>
-      </tr>
-    </table>
-  <% end %>
-</div>
+        <% else %>
+          <p style="margin: 2px 0;"><strong>None</strong></p>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="<%= manage_url(domain) %>" style="color: #1A5EC6;">Manage domain</a>
+      </td>
+    </tr>
+  </table>
+<% end %>

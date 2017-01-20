@@ -1,24 +1,49 @@
 <%= if length(@domains ++ @certificates) == 0 do %>
-<h1>You have no expiring items within the next 30 days! 🎉</h1>
+  <table width="100%" cellpadding="10px" cellspacing="10px" style="margin-bottom: 15px; background-color: #d3f9b3">
+    <tr>
+      <td>You have no expiring items within the next 30 days.</td>
+    </tr>
+  </table>
 <% else %>
-<h1>You have <%= length(@domains ++ @certificates) %> items within the next 30 days!</h1>
-
-<%= if length(@domains) > 0 do %>
-<h2><%= length(@domains) %> domains:</h2>
-<ul>
-<%= Enum.map @domains, fn domain -> %>
-  <li><%= domain.name %> expires <%= domain.expires_on %></li>
-<% end %>
-</ul>
-<% end %>
-
-<%= if length(@certificates) > 0 do %>
-<h2><%= length(@certificates) %> certificates:</h2>
-<ul>
-<%= Enum.map @certificates, fn certificate -> %>
-  <li><%= certificate.common_name %> expires <%= certificate.expires_on %></li>
-<% end %>
-</ul>
-<% end %>
-
+  <table width="100%" cellpadding="10px" cellspacing="10px" style="margin-bottom: 15px; background-color: #fed6d6">
+    <tr>
+      <td>You have <strong><%= length(@domains ++ @certificates) %> items </strong>expiring within the next 30 days.</td>
+    </tr>
+    <%= if length(@domains) > 0 do %>
+      <tr>
+        <td>
+          <table width="100%" cellpadding="2px" cellspacing="2px">
+            <tr>
+              <td style="padding-bottom: 10px"><span style="font-size: 12px; letter-spacing: 1.3px;"><strong><%= length(@domains) %> DOMAINS</strong></span></td>
+            </tr>
+            <%= Enum.map @domains, fn domain -> %>
+              <tr>
+                <td><strong><%= domain.name %></strong></td>
+                <td style="color: #835F5F;">expires on</td>
+                <td><strong><%= domain.expires_on %></strong></td>
+              </tr>
+            <% end %>
+          </table>
+        </td>
+      </tr>
+    <% end %>
+    <%= if length(@certificates) > 0 do %>
+      <tr>
+        <td>
+          <table width="100%" cellpadding="2px" cellspacing="2px">
+            <tr>
+              <td style="padding-bottom: 10px;"><span style="font-size: 12px; letter-spacing: 1.3px;"><strong><%= length(@domains) %> SSL CERTIFICATES</span></strong></td>
+            </tr>
+            <%= Enum.map @certificates, fn certificate -> %>
+              <tr>
+                <td><strong><%= certificate.common_name %></strong></td>
+                <td style="color: #835F5F;">expires on</td>
+                <td><strong><%= certificate.expires_on %></strong></td>
+              </tr>
+            <% end %>
+          </table>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 <% end %>
