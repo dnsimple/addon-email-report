@@ -61,7 +61,7 @@
           <%= Enum.map forwards, fn forward -> %>
             <table width="100%" cellpadding="2px" cellspacing="2px" style="margin: 10px;">
               <tr>
-                <td><span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">FROM</span></td>
+                <td style="width: 10%;"><span style="font-size: 12px; color: #818181; letter-spacing: 1.3px;">FROM</span></td>
                 <td><strong><%= forward.from %></strong></td>
               </tr>
               <tr>
