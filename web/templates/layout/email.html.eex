@@ -2,7 +2,7 @@
   <head>
     <title><%= @email.subject %></title>
   </head>
-  <body>
+  <body bgcolor="#fafafa">
     <%= render @view_module, @view_template, assigns %>
   </body>
 </html>
