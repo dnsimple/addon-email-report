@@ -32,7 +32,7 @@
         <td>
           <table width="100%" cellpadding="2px" cellspacing="2px">
             <tr>
-              <td style="padding-bottom: 10px;"><span style="font-size: 12px; letter-spacing: 1.3px;"><strong><%= length(@domains) %> SSL CERTIFICATES</span></strong></td>
+              <td style="padding-bottom: 10px;"><span style="font-size: 12px; letter-spacing: 1.3px;"><strong><%= length(@certificates) %> SSL CERTIFICATES</span></strong></td>
             </tr>
             <%= Enum.map @certificates, fn certificate -> %>
               <tr>

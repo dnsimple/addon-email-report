@@ -11,7 +11,7 @@
         </tr>
         <tr>
           <td>
-            <%= render "expires.html", domains: @expiring_domains, certificates: @expiring_domains %>
+            <%= render "expires.html", domains: @expiring_domains, certificates: @expiring_certificates %>
           </td>
         </tr>
         <tr>
