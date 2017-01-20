@@ -1,5 +1,5 @@
 <%= Enum.map @domains, fn {domain, certs, forwards} -> %>
-  <table width="100%" cellpadding="10px" cellspacing="10px" style="margin-bottom: 15px; background-color: #fafafa">
+  <table width="100%" cellpadding="10px" cellspacing="10px" style="margin-bottom: 15px; background-color: #fff; border: 1px solid #e8e8e8;">
     <tr>
       <td><strong style="font-size: 21px;"><%= domain.unicode_name %></strong></td>
     </tr>

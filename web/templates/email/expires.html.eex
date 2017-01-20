@@ -1,11 +1,11 @@
 <%= if length(@domains ++ @certificates) == 0 do %>
-  <table width="100%" cellpadding="10px" cellspacing="10px" style="margin-bottom: 15px; background-color: #d3f9b3">
+  <table width="100%" cellpadding="10px" cellspacing="10px" style="margin-bottom: 15px; background-color: #d3f9b3; border: 1px solid #b1cc9a;">
     <tr>
       <td>You have no expiring items within the next 30 days.</td>
     </tr>
   </table>
 <% else %>
-  <table width="100%" cellpadding="10px" cellspacing="10px" style="margin-bottom: 15px; background-color: #fed6d6">
+  <table width="100%" cellpadding="10px" cellspacing="10px" style="margin-bottom: 15px; background-color: #fed6d6; border: 1px solid #e6bbbb;">
     <tr>
       <td>You have <strong><%= length(@domains ++ @certificates) %> items </strong>expiring within the next 30 days.</td>
     </tr>
