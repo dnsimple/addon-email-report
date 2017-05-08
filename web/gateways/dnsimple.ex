@@ -8,13 +8,13 @@ defmodule EmailReports.Dnsimple do
   end
 
   def exchange_authorization_for_token(client, attributes) do
-    oauth_service.exchange_authorization_for_token(client, attributes)
+    oauth_service().exchange_authorization_for_token(client, attributes)
   end
 
   # Identity
 
   def whoami(account) do
-    case identity_service.whoami(client(account)) do
+    case identity_service().whoami(client(account)) do
       {:ok, response} -> response.data
       {:error, error} ->
         Logger.warn(inspect error)
@@ -25,7 +25,7 @@ defmodule EmailReports.Dnsimple do
   # Domains
 
   def domains(account) do
-    case domains_service.all_domains(client(account), account.dnsimple_account_id) do
+    case domains_service().all_domains(client(account), account.dnsimple_account_id) do
       {:ok, all_domains} -> all_domains
       {:error, error} ->
         Logger.warn(inspect error)
@@ -34,7 +34,7 @@ defmodule EmailReports.Dnsimple do
   end
 
   def domain(account, domain_id) do
-    case domains_service.get_domain(client(account), account.dnsimple_account_id, domain_id) do
+    case domains_service().get_domain(client(account), account.dnsimple_account_id, domain_id) do
       {:ok, response} -> response.data
       {:error, error} ->
         Logger.warn(inspect error)
@@ -45,7 +45,7 @@ defmodule EmailReports.Dnsimple do
   # Domain Certificates
 
   def certificates(account, domain_name) do
-    case certificates_service.list_certificates(client(account), account.dnsimple_account_id, domain_name) do
+    case certificates_service().list_certificates(client(account), account.dnsimple_account_id, domain_name) do
       {:ok, response} -> response.data
       {:error, error} ->
         Logger.warn(inspect error)
@@ -54,7 +54,7 @@ defmodule EmailReports.Dnsimple do
   end
 
   def certificate(account, domain_name, certificate_id) do
-    case certificates_service.get_certificate(client(account), account.dnsimple_account_id, domain_name, certificate_id) do
+    case certificates_service().get_certificate(client(account), account.dnsimple_account_id, domain_name, certificate_id) do
       {:ok, response} -> response.data
       {:error, error} ->
         Logger.warn(inspect error)
@@ -71,7 +71,7 @@ defmodule EmailReports.Dnsimple do
   end
 
   def download_certificate(account, domain_name, certificate_id) do
-    case certificates_service.download_certificate(client(account), account.dnsimple_account_id, domain_name, certificate_id) do
+    case certificates_service().download_certificate(client(account), account.dnsimple_account_id, domain_name, certificate_id) do
       {:ok, response} -> response.data
       {:error, error} ->
         Logger.warn(inspect error)
@@ -80,7 +80,7 @@ defmodule EmailReports.Dnsimple do
   end
 
   def private_key(account, domain_name, certificate_id) do
-    case certificates_service.get_certificate_private_key(client(account), account.dnsimple_account_id, domain_name, certificate_id) do
+    case certificates_service().get_certificate_private_key(client(account), account.dnsimple_account_id, domain_name, certificate_id) do
       {:ok, response} -> response.data
       {:error, error} ->
         Logger.warn(inspect error)
@@ -91,7 +91,7 @@ defmodule EmailReports.Dnsimple do
   # E-Mail forwards
 
   def email_forwards(account, domain_name) do
-    case domains_service.list_email_forwards(client(account), account.dnsimple_account_id, domain_name) do
+    case domains_service().list_email_forwards(client(account), account.dnsimple_account_id, domain_name) do
       {:ok, response} -> response.data
       {:error, error} ->
         Logger.warn(inspect error)
@@ -102,7 +102,7 @@ defmodule EmailReports.Dnsimple do
   # Domain Services
 
   def applied_services(account, domain_name) do
-    case services_service.applied_services(client(account), account.dnsimple_account_id, domain_name) do
+    case services_service().applied_services(client(account), account.dnsimple_account_id, domain_name) do
       {:ok, response} -> response.data
       {:error, error} ->
         Logger.warn(inspect error)
@@ -111,7 +111,7 @@ defmodule EmailReports.Dnsimple do
   end
 
   def apply_service(account, domain_name, service_id) do
-    case services_service.apply_service(client(account), account.dnsimple_account_id, domain_name, service_id) do
+    case services_service().apply_service(client(account), account.dnsimple_account_id, domain_name, service_id) do
       {:ok, _response} -> service_id
       {:error, error} ->
         Logger.warn(inspect error)
@@ -120,7 +120,7 @@ defmodule EmailReports.Dnsimple do
   end
 
   def unapply_service(account, domain_name, service_id) do
-    case services_service.unapply_service(client(account), account.dnsimple_account_id, domain_name, service_id) do
+    case services_service().unapply_service(client(account), account.dnsimple_account_id, domain_name, service_id) do
       {:ok, _response} -> service_id
       {:error, error} ->
         Logger.warn(inspect error)
@@ -131,7 +131,7 @@ defmodule EmailReports.Dnsimple do
   # Records
 
   def get_records(account, zone_name) do
-    case zones_service.list_zone_records(client(account), account.dnsimple_account_id, zone_name) do
+    case zones_service().list_zone_records(client(account), account.dnsimple_account_id, zone_name) do
       {:ok, response} -> response.data
       {:error, error} ->
         Logger.warn(inspect error)
@@ -141,7 +141,7 @@ defmodule EmailReports.Dnsimple do
 
   def create_records(account, zone_name, records) do
     c = client(account)
-    zs = zones_service
+    zs = zones_service()
 
     Enum.map(records, fn(record) ->
       zs.create_zone_record(c, account.dnsimple_account_id, zone_name, record_to_map(record))
@@ -150,7 +150,7 @@ defmodule EmailReports.Dnsimple do
 
   def delete_records(account, zone_name, record_ids) do
     c = client(account)
-    zs = zones_service
+    zs = zones_service()
     Enum.map(record_ids, &(zs.delete_zone_record(c, account.dnsimple_account_id, zone_name, &1)))
   end
 
@@ -161,7 +161,7 @@ defmodule EmailReports.Dnsimple do
   # Webhooks
 
   def create_webhook(account, webhook_url) do
-    case webhooks_service.create_webhook(client(account), account.dnsimple_account_id, %{url: webhook_url}) do
+    case webhooks_service().create_webhook(client(account), account.dnsimple_account_id, %{url: webhook_url}) do
       {:ok, response} -> response.data
       {:error, error} ->
         Logger.warn(inspect error)
@@ -170,11 +170,11 @@ defmodule EmailReports.Dnsimple do
   end
 
   def delete_webhook(account, webhook_id) do
-    webhooks_service.delete_webhook(client(account), account.dnsimple_account_id, webhook_id)
+    webhooks_service().delete_webhook(client(account), account.dnsimple_account_id, webhook_id)
   end
 
   def delete_webhook!(account, webhook_id) do
-    case webhooks_service.delete_webhook(client(account), account.dnsimple_account_id, webhook_id) do
+    case webhooks_service().delete_webhook(client(account), account.dnsimple_account_id, webhook_id) do
       {:ok, response} -> response.data
       {:error, error} ->
         Logger.warn(inspect error)
