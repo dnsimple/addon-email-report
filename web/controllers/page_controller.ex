@@ -8,7 +8,7 @@ defmodule EmailReports.PageController do
   def index(conn, _params) do
     account = conn.assigns[:current_account]
     dnsimple_account = account
-    |> EmailReports.Dnsimple.whoami
+    |> EmailReports.Dnsimple.whoami()
     |> Map.get(:account)
 
     changeset = Subscription.changeset(%Subscription{
@@ -25,7 +25,7 @@ defmodule EmailReports.PageController do
   def send(conn, %{"report_params" => %{"email" => email}}) do
     account = conn.assigns[:current_account]
     %{email: email, token: account.dnsimple_access_token}
-    |> EmailReports.ReportEmail.simple
+    |> EmailReports.ReportEmail.simple()
     |> EmailReports.Mailer.deliver
     conn
     |> put_flash(:info, "Mail sent to #{email}.")

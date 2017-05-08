@@ -11,7 +11,7 @@ defmodule EmailReports.ReportEmail do
     |> Enum.map(&(Task.async(__MODULE__, :enrich_domain, [&1, account])))
     |> Enum.map(&Task.await/1)
 
-    new
+    new()
     |> to(user.email)
     |> from(config(:report_from))
     |> reply_to(config(:report_reply_to))
