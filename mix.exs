@@ -41,7 +41,7 @@ defmodule EmailReports.Mixfile do
       {:credo, "~> 0.5", only: [:dev, :test]},
       {:gettext, "~> 0.11"},
       # Go back to original hex pkg when new released is published
-      {:dnsimple, github: "dnsimple/dnsimple-elixir"},
+      {:dnsimple, github: "dnsimple/dnsimple-elixir", branch: "bugfix/relax-poison"},
       {:swoosh, "~> 0.5.0"},
       {:phoenix_swoosh, "~> 0.1.3"},
       {:cowboy, "~> 1.0"},
