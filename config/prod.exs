@@ -67,8 +67,9 @@ config :logger, level: :info
 
 # Configure swoosh
 config :email_reports, EmailReports.Mailer,
-  adapter: Swoosh.Adapters.Postmark,
-  api_key: System.get_env("POSTMARK_API_KEY")
+  adapter: Swoosh.Adapters.Mailgun,
+  api_key: System.get_env("MAILGUN_API_KEY"),
+  domain: System.get_env("MAILGUN_DOMAIN")
 
 # Configure 3rd parties
 config :email_reports,
