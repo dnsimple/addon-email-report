@@ -15,6 +15,10 @@ defmodule Mix.Tasks.Reports.Send do
     {:ok, _pid, _} = ensure_started(EmailReports.Repo, [])
     for app <- [:dnsimple, :swoosh, :phoenix], do: Application.ensure_all_started(app)
 
+    # sleep for 30 seconds to ensure tzdata is started and up to date,
+    # elixir is just not made for this ... :(
+    :timer.sleep(30000)
+
     Repo.all(
       from s in EmailReports.Subscription,
        where: s.last_sent < ago(1, "month"),
